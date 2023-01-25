@@ -1,9 +1,13 @@
 import b from "b_";
+import { useContext } from "react";
+import { CartContex } from "../../store/cart-contex";
 import { Modal } from "../UI/modal";
 
 import "./cart.scss";
 
 export const Cart = (props: any) => {
+  const cartCtx = useContext(CartContex);
+  
   return (
     <Modal onClose={props.onClose}>
       <ul className={b("cart-items")}>
@@ -13,7 +17,7 @@ export const Cart = (props: any) => {
       </ul>
       <div className={b("total")}>
         <span>Total Amount</span>
-        <span>35.62</span>
+        <span>{cartCtx.totalAmount}</span>
       </div>
       <div className={b("actions")}>
         <button

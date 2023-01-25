@@ -1,10 +1,23 @@
 import b from "b_";
+import { useContext } from "react";
 import { ICard } from "../../../interfaces";
+import { CartContex } from "../../../store/cart-contex";
 import { MealItemForm } from "./meal-item-form";
 import "./meal-item.scss";
 
 export const MealItem = (props: ICard) => {
   const price = `$${props.price.toFixed(2)}`;
+  const ctxCart = useContext(CartContex);
+
+  const addItemToCartHandler = (amount: any) => {
+    ctxCart.addItem({
+      id: props.id,
+      name: props.name,
+      amount: amount,
+      price: props.price,
+    });
+  };
+
   return (
     <li className={b("meal")}>
       <div>
@@ -13,7 +26,7 @@ export const MealItem = (props: ICard) => {
         <div className={b("meal", "price")}>{price}</div>
       </div>
       <div>
-        <MealItemForm id={props.id} />
+        <MealItemForm id={props.id} onAddToCart={addItemToCartHandler} />
       </div>
     </li>
   );
