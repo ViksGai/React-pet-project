@@ -5,12 +5,12 @@ import mealsImg from '../../assets/meals.jpg';
 import { HeaderCartButton } from "./header-cart-button";
 import './header.scss'
 
-export const Header = () => {
+export const Header = (props: any) => {
     return (
     <Fragment>
         <header className={b('header')}>
             <h1 className={b('header', 'title')}>Meals</h1>
-           <HeaderCartButton />
+           <HeaderCartButton onClick={props.onShowCart} />
         </header>
         <div className={b('main-image')}>
             <img src={mealsImg} alt='food'/>
