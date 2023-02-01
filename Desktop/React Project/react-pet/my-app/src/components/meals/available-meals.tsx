@@ -4,9 +4,12 @@ import { MealItem } from "./meal-item/meal-item";
 
 import "./available-meals.scss";
 import { useEffect, useState } from "react";
+import { ICard } from "../../interfaces";
 
 export const AvailableMeals = () => {
-  const [meals, setMeals] = useState<any>([]);
+  const [meals, setMeals] = useState<ICard[]>([]);
+  const  [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchMeals = async () => {
       const response = await fetch(
@@ -24,14 +27,24 @@ export const AvailableMeals = () => {
         });
       }
       setMeals(loadedMeals);
+      setIsLoading(false);
     };
     fetchMeals();
   }, []);
+
+  if(isLoading) {
+    return (
+        <section className={b('loading')}>
+            <p>Loading...</p>
+        </section>
+    )
+  }
+
   return (
     <section className={b("meals")}>
       <Card>
         <ul>
-          {meals.map((meal: any) => (
+          {meals.map((meal: ICard) => (
             <MealItem
               key={meal.id}
               name={meal.name}
