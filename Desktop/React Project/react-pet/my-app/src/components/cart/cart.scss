@@ -6,7 +6,7 @@
   overflow: auto;
 }
 
-.total {
+.total-amount {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,7 +15,7 @@
   margin: 1rem 0;
 }
 
-.actions {
+.actions-btns {
   text-align: right;
   & > button {
     font: inherit;
