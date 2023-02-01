@@ -1,5 +1,4 @@
 import b from "b_";
-import { MOCK_MEALS } from "../../MOCK_MEALS";
 import { Card } from "../UI/card";
 import { MealItem } from "./meal-item/meal-item";
 
