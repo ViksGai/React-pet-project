@@ -25,7 +25,7 @@ export const MealItemForm = (props: any) => {
     props.onAddToCart(enteredAmountNumber);
   };
   return (
-    <form className={b("form")} onSubmit={submitHandler}>
+    <form className={b("meal-form")} onSubmit={submitHandler}>
       <Input
         ref={amountInputRef}
         label="Amount"

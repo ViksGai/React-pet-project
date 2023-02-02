@@ -8,13 +8,19 @@ import { ICard } from "../../interfaces";
 
 export const AvailableMeals = () => {
   const [meals, setMeals] = useState<ICard[]>([]);
-  const  [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [httpErr, setHttpErr] = useState();
 
   useEffect(() => {
     const fetchMeals = async () => {
       const response = await fetch(
         "https://pet-react-b09e5-default-rtdb.firebaseio.com/meals.json"
       );
+
+      if (!response.ok) {
+        throw new Error("Something went wrong.");
+      }
+
       const responseData = await response.json();
       const loadedMeals = [];
 
@@ -29,15 +35,27 @@ export const AvailableMeals = () => {
       setMeals(loadedMeals);
       setIsLoading(false);
     };
-    fetchMeals();
+
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      setHttpErr(error.message);
+    });
   }, []);
 
-  if(isLoading) {
+  if (isLoading) {
     return (
-        <section className={b('loading')}>
-            <p>Loading...</p>
-        </section>
-    )
+      <section className={b("loading")}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (httpErr) {
+    return (
+      <section className={b("error")}>
+        <p>{httpErr}</p>
+      </section>
+    );
   }
 
   return (
