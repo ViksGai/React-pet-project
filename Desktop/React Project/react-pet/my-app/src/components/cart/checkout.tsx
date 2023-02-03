@@ -45,6 +45,13 @@ export const Checkout = (props: any) => {
       enteredStreetIsValid &&
       enteredPostalIsValid &&
       enteredCityIsValid;
+
+    props.onConfirm({
+      enteredName,
+      enteredCity,
+      enteredStreet,
+      enteredPostal,
+    });
   };
 
   return (
@@ -59,7 +66,9 @@ export const Checkout = (props: any) => {
         <input type="text" id="street" ref={streetInputRef}></input>
         {!formValidity.street && <p>Please enter the street</p>}
       </div>
-      <div className={`form__control ${formValidity.postalCode ? "" : "invalid"}`}>
+      <div
+        className={`form__control ${formValidity.postalCode ? "" : "invalid"}`}
+      >
         <label htmlFor="postal">Postal Code</label>
         <input type="text" id="postal" ref={postalInputRef}></input>
         {!formValidity.postalCode && <p>Please enter the postal code</p>}
